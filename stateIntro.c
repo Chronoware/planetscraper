@@ -45,3 +45,5 @@ void introRedraw() {
   
   SDL_RenderPresent(renderer);
 }
+
+struct introState = {&introEvents, &introTick, &introRedraw};
