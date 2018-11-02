@@ -4,6 +4,7 @@
 #include "events.h"
 #include "tick.h"
 #include "render.h"
+#include "states.h"
 
 
 void introEvents() {
@@ -46,4 +47,8 @@ void introRedraw() {
   SDL_RenderPresent(renderer);
 }
 
-struct introState = {&introEvents, &introTick, &introRedraw};
+State introState = {
+  .events = introEvents,
+  .tick   = introTick,
+  .redraw = introRedraw
+};

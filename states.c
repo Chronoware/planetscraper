@@ -6,6 +6,6 @@
 #include "tick.h"
 #include "render.h"
 
-void setState(State* state) {
+void setState(struct State* state) {
   currentState = state;
 }
