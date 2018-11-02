@@ -5,6 +5,7 @@
 #include "tick.h"
 #include "render.h"
 #include "states.h"
+#include "stateMenu.h"
 
 
 void introEvents() {
@@ -16,7 +17,7 @@ void introEvents() {
 }
 
 void introTick() {
-  //printf("%d\n", tickNo);
+  if(tickNo == 100) nextState = &menuState;
 
   tickNo++;
 }

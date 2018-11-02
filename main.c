@@ -25,6 +25,11 @@ int main(int argc, char** argv) {
     currentState->tick();
     currentState->redraw();
 
+    if(nextState != NULL) {
+      setState(nextState);
+      nextState = NULL;
+    }
+
     SDL_Delay(20);
   }
 

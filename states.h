@@ -9,5 +9,6 @@ typedef struct State {
 
 void setState(State* state);
 struct State *currentState;
+struct State *nextState;
 
 #endif

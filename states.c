@@ -9,3 +9,6 @@
 void setState(struct State* state) {
   currentState = state;
 }
+
+struct State *currentState = NULL;
+struct State *nextState = NULL;
