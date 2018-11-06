@@ -6,19 +6,47 @@
 #include "render.h"
 #include "states.h"
 
+#define OPTIONS 5
+
+static int choice = 0;
+static char options[OPTIONS][16] = {
+  "New game",
+  "Load game",
+  "Options",
+  "Credits",
+  "Exit"
+};
 
 void menuEvents() {
   SDL_Event e;
   
   while(SDL_PollEvent(&e)) {
-    if(e.type == SDL_QUIT) quit = true;
+    switch(e.type) {
+      case SDL_QUIT:
+        quit = true;
+        break;
+      
+      case SDL_KEYDOWN:
+        switch(e.key.keysym.sym) {
+          case SDLK_UP:
+            if(--choice == -1) choice = OPTIONS - 1;
+            break;
+
+          case SDLK_DOWN:
+            if(++choice == OPTIONS) choice = 0;
+            break;
+        }
+        break;
+    }
   }
 }
 
 void menuTick() {
-  char str[12];
-  sprintf(str, "%d", tickNo);
-  write(1, 1, str, 0xFFF, 0);
+  if(tickNo == 0) clearScreen();
+
+  for(int i=0; i<OPTIONS; i++) {
+    write(1, SCREEN_H/2 + 5 + i + (i==OPTIONS-1 ? 1 : 0), options[i], choice == i ? 0x0F0 : 0xFFF, 0);
+  }
 }
 
 void menuRedraw() {

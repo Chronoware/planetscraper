@@ -17,7 +17,11 @@ void introEvents() {
 }
 
 void introTick() {
-  if(tickNo == 100) nextState = &menuState;
+  if(tickNo == 0) {
+    write(SCREEN_W/2 - 5, SCREEN_H/2 + 5, "Chronoware", 0x0F0, 0);
+    write(SCREEN_W/2 - 2, SCREEN_H/2 + 6,    "Games"  , 0xFFF, 0);
+  }
+  if(tickNo == 50) nextState = &menuState;
 }
 
 void introRedraw() {

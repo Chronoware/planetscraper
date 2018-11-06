@@ -15,9 +15,6 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  write(SCREEN_W/2 - 5, SCREEN_H/2 + 5, "Chronoware", 0xF00, 0);
-  write(SCREEN_W/2 - 2, SCREEN_H/2 + 6,    "Games"  , 0xFFF, 0);
-
   nextState = &introState;
 
   while(!quit) {
