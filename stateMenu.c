@@ -18,7 +18,7 @@ void menuEvents() {
 void menuTick() {
   char str[12];
   sprintf(str, "%d", tickNo);
-  write(1, 1, str, 0xFFF, 0);
+  write(1, 1, str, 0xFFF, 0x555);
 }
 
 void menuRedraw() {
@@ -38,8 +38,13 @@ void menuRedraw() {
 
     uint8_t r = (screen[i+1] & 0x0F)*17,
             g = (screen[i+2] >> 4)*17,
-            b = (screen[i+2] & 0x0F)*17;
-  
+            b = (screen[i+2] & 0x0F)*17,
+            rb = (screen[i+3] & 0x0F)*17,
+            gb = (screen[i+4] >> 4)*17,
+            bb = (screen[i+4] & 0x0F)*17;
+
+    SDL_SetRenderDrawColor(renderer, rb, gb, bb, SDL_ALPHA_OPAQUE);
+    SDL_RenderFillRect(renderer, &dst);
     SDL_SetTextureColorMod(tileset, r, g, b);
     SDL_RenderCopy(renderer, tileset, &src, &dst);
   }
