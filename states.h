@@ -2,9 +2,9 @@
 #define STATES__H
 
 typedef struct State {
-    void (*events)(void);
-    void (*tick)(void);
-    void (*redraw)(void);
+    void (*events)();
+    void (*tick)();
+    void (*redraw)();
 } State;
 
 void setState(State* state);

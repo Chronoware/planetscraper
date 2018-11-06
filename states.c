@@ -7,6 +7,7 @@
 #include "render.h"
 
 void setState(struct State* state) {
+  tickNo = 0;
   currentState = state;
 }
 
