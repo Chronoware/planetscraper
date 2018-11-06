@@ -6,6 +6,7 @@
 #include "render.h"
 #include "states.h"
 #include "stateMenu.h"
+#include "colors.h"
 
 
 void introEvents() {
