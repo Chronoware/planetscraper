@@ -21,17 +21,13 @@ int main(int argc, char** argv) {
   nextState = &introState;
 
   while(!quit) {
-    printf("changeState, %d\n", tickNo);
     if(nextState != NULL) {
       setState(nextState);
       nextState = NULL;
     }
 
-    printf("events, %d\n", tickNo);
-    currentState->events(); //SEGFAULT in menuState
-    printf("tick, %d\n", tickNo);
+    currentState->events();
     currentState->tick();
-    printf("redraw, %d\n", tickNo);
     currentState->redraw();
 
     tickNo++;
