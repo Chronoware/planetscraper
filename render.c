@@ -38,7 +38,7 @@ bool init() {
     return false;
   }
 
-  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
   if(renderer == NULL) return false;
 
   tileset = SDL_CreateTextureFromSurface(renderer, tilesetSurface);

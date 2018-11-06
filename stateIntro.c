@@ -4,6 +4,9 @@
 #include "events.h"
 #include "tick.h"
 #include "render.h"
+#include "states.h"
+#include "stateMenu.h"
+#include "colors.h"
 
 
 void introEvents() {
@@ -15,9 +18,11 @@ void introEvents() {
 }
 
 void introTick() {
-  //printf("%d\n", tickNo);
-
-  tickNo++;
+  if(tickNo == 0) {
+    write(SCREEN_W/2 - 5, SCREEN_H/2 + 5, "Chronoware", 0x0F0, 0);
+    write(SCREEN_W/2 - 2, SCREEN_H/2 + 6,    "Games"  , 0xFFF, 0);
+  }
+  if(tickNo == 50) nextState = &menuState;
 }
 
 void introRedraw() {
@@ -45,3 +50,9 @@ void introRedraw() {
   
   SDL_RenderPresent(renderer);
 }
+
+State introState = {
+  .events = introEvents,
+  .tick   = introTick,
+  .redraw = introRedraw
+};

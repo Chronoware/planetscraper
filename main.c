@@ -4,10 +4,10 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "states.h"
-#include "stateIntro.h"
 #include "events.h"
 #include "tick.h"
 #include "render.h"
+#include "stateIntro.h"
 
 int main(int argc, char** argv) {
   if(!init()) {
@@ -15,18 +15,19 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  write(SCREEN_W/2 - 5, SCREEN_H/2 + 5, "Chronoware", 0xF00, 0);
-  write(SCREEN_W/2 - 2, SCREEN_H/2 + 6,    "Games"  , 0xFFF, 0);
-
-  events = introEvents;
-  tick = introTick;
-  redraw = introRedraw;
+  nextState = &introState;
 
   while(!quit) {
-    events();
-    tick();
-    redraw();
+    if(nextState != NULL) {
+      setState(nextState);
+      nextState = NULL;
+    }
 
+    currentState->events();
+    currentState->tick();
+    currentState->redraw();
+
+    tickNo++;
     SDL_Delay(20);
   }
 
