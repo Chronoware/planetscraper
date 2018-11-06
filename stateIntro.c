@@ -18,8 +18,6 @@ void introEvents() {
 
 void introTick() {
   if(tickNo == 100) nextState = &menuState;
-
-  tickNo++;
 }
 
 void introRedraw() {

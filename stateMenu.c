@@ -19,8 +19,6 @@ void menuTick() {
   char str[12];
   sprintf(str, "%d", tickNo);
   write(1, 1, str, 0xFFF, 0);
-
-  tickNo++;
 }
 
 void menuRedraw() {
