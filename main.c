@@ -18,17 +18,17 @@ int main(int argc, char** argv) {
   write(SCREEN_W/2 - 5, SCREEN_H/2 + 5, "Chronoware", 0xF00, 0);
   write(SCREEN_W/2 - 2, SCREEN_H/2 + 6,    "Games"  , 0xFFF, 0);
 
-  setState(&introState);
+  nextState = &introState;
 
   while(!quit) {
-    currentState->events();
-    currentState->tick();
-    currentState->redraw();
-
     if(nextState != NULL) {
       setState(nextState);
       nextState = NULL;
     }
+
+    currentState->events(); //SEGFAULT in menuState
+    currentState->tick();
+    currentState->redraw();
 
     SDL_Delay(20);
   }
