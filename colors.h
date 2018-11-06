@@ -11,3 +11,5 @@
 #define COLOR_DARK_GRAY 0x444
 #define COLOR_GRAY      0x888
 #define COLOR_WHITE     0xFFF
+
+#endif

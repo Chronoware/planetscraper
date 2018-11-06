@@ -5,6 +5,7 @@
 #include "tick.h"
 #include "render.h"
 #include "states.h"
+#include "colors.h"
 
 
 void menuEvents() {
