@@ -36,6 +36,10 @@ void menuEvents() {
           case SDLK_DOWN:
             if(++choice == OPTIONS) choice = 0;
             break;
+
+          case SDLK_RETURN:
+            if(!strcmp(options[choice], "Exit")) quit = true;
+            break;
         }
         break;
     }
