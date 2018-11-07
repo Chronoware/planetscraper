@@ -65,12 +65,12 @@ void menuRedraw() {
     dst.x = ((i/5)%SCREEN_W)*tileW*zoom; dst.w = tileW*zoom;
     dst.y = ((i/5)/SCREEN_W)*tileH*zoom; dst.h = tileH*zoom;
 
-    uint8_t r = (screen[i+1] & 0x0F)*17,
-            g = (screen[i+2] >> 4)*17,
-            b = (screen[i+2] & 0x0F)*17,
-            rb = (screen[i+3] & 0x0F)*17,
-            gb = (screen[i+4] >> 4)*17,
-            bb = (screen[i+4] & 0x0F)*17;
+    uint8_t r = fgRed(screen, i),
+            g = fgGreen(screen, i),
+            b = fgBlue(screen, i),
+            rb = bgRed(screen, i),
+            gb = bgGreen(screen, i),
+            bb = bgBlue(screen, i);
 
     SDL_SetRenderDrawColor(renderer, rb, gb, bb, SDL_ALPHA_OPAQUE);
     SDL_RenderFillRect(renderer, &dst);

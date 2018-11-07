@@ -12,4 +12,11 @@
 #define COLOR_GRAY      0x888
 #define COLOR_WHITE     0xFFF
 
+uint8_t fgRed(uint8_t* src, uint32_t pos);
+uint8_t fgGreen(uint8_t* src, uint32_t pos);
+uint8_t fgBlue(uint8_t* src, uint32_t pos);
+uint8_t bgRed(uint8_t* src, uint32_t pos);
+uint8_t bgGreen(uint8_t* src, uint32_t pos);
+uint8_t bgBlue(uint8_t* src, uint32_t pos);
+
 #endif
