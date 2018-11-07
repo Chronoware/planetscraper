@@ -1,6 +1,8 @@
 #include <stdint.h>
 #include "colors.h"
 
+// color = ????rrrr.ggggbbbb; 2 bytes, 4-bit colors, first 4 bits reserved
+
 uint8_t fgRed(uint8_t* src, uint32_t pos){
     return (src[pos+1] & 0x0F)*17;
 }
