@@ -8,14 +8,23 @@
 #include "colors.h"
 
 #define OPTIONS 5
+#define SETTINGS 1
 
+static int currentScreen = 0;
+static int currentOptions = OPTIONS;
 static int choice = 0;
 static char options[OPTIONS][16] = {
   "New game",
   "Load game",
-  "Options",
+  "Settings",
   "Credits",
   "Exit"
+};
+static char settings[SETTINGS][32] = {
+  "Show current tick"
+};
+static bool settingVals[SETTINGS] = {
+  false //showTick
 };
 
 void menuEvents() {
@@ -30,15 +39,35 @@ void menuEvents() {
       case SDL_KEYDOWN:
         switch(e.key.keysym.sym) {
           case SDLK_UP:
-            if(--choice == -1) choice = OPTIONS - 1;
+            if(--choice == -1) choice = currentOptions - 1;
             break;
 
           case SDLK_DOWN:
-            if(++choice == OPTIONS) choice = 0;
+            if(++choice == currentOptions) choice = 0;
             break;
 
           case SDLK_RETURN:
-            if(!strcmp(options[choice], "Exit")) quit = true;
+            if(currentScreen == 0){
+              if(!strcmp(options[choice], "Exit")) quit = true;
+              if(!strcmp(options[choice], "Settings")) {
+                currentOptions = SETTINGS + 1;
+                currentScreen = 3;
+                choice = 0;
+                clearScreen();
+                break;
+              }
+            }
+            if(currentScreen == 3){
+              if(choice == SETTINGS){
+                currentOptions = OPTIONS;
+                currentScreen = 0;
+                choice = 0;
+                clearScreen();
+                break;
+              } else{
+                settingVals[choice] = !settingVals[choice];
+              }
+            }
             break;
         }
         break;
@@ -48,9 +77,18 @@ void menuEvents() {
 
 void menuTick() {
   if(tickNo == 0) clearScreen();
+  //if(settingVals[0])write(2, 1, tickNo, COLOR_WHITE, COLOR_GRAY);
 
-  for(int i=0; i<OPTIONS; i++) {
-    write(1, SCREEN_H/2 + 5 + i + (i==OPTIONS-1 ? 1 : 0), options[i], choice == i ? 0x0F0 : 0xFFF, 0);
+  if(currentScreen == 0){
+    for(int i=0; i<OPTIONS; i++) {
+      write(1, SCREEN_H/2 + 5 + i + (i==OPTIONS-1 ? 1 : 0), options[i], choice == i ? COLOR_GREEN : COLOR_WHITE, 0);
+    }
+  }
+  if(currentScreen == 3){
+    for(int i=0; i<SETTINGS; i++) {
+      write(1, SCREEN_H/2 + 5 + i + (i==SETTINGS-1 ? 1 : 0), settings[i], choice == i ? COLOR_GREEN : COLOR_WHITE, settingVals[i] ? COLOR_BLUE : COLOR_RED);
+    }
+    write(1, SCREEN_H/2 + 5 + SETTINGS+2, "Return", choice == SETTINGS ? COLOR_GREEN : COLOR_WHITE, 0);
   }
 }
 
