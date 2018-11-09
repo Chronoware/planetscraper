@@ -47,13 +47,13 @@ void menuEvents() {
             break;
 
           case SDLK_RETURN:
+            clearScreen();
             if(currentScreen == 0){
               if(!strcmp(options[choice], "Exit")) quit = true;
               if(!strcmp(options[choice], "Settings")) {
                 currentOptions = SETTINGS + 1;
                 currentScreen = 3;
                 choice = 0;
-                clearScreen();
                 break;
               }
             }
@@ -62,7 +62,6 @@ void menuEvents() {
                 currentOptions = OPTIONS;
                 currentScreen = 0;
                 choice = 0;
-                clearScreen();
                 break;
               } else{
                 settingVals[choice] = !settingVals[choice];
@@ -86,7 +85,8 @@ void menuTick() {
   }
   if(currentScreen == 3){
     for(int i=0; i<SETTINGS; i++) {
-      write(1, SCREEN_H/2 + 5 + i + (i==SETTINGS-1 ? 1 : 0), settings[i], choice == i ? COLOR_GREEN : COLOR_WHITE, settingVals[i] ? COLOR_BLUE : COLOR_RED);
+      write(1, SCREEN_H/2 + 5 + i + (i==SETTINGS-1 ? 1 : 0), settings[i], choice == i ? COLOR_GREEN : COLOR_WHITE, 0);
+      write(SCREEN_W-4, SCREEN_H/2 + 5 + i + (i==SETTINGS-1 ? 1 : 0), settingVals[i] ? "ON" : "OFF", settingVals[i] ? COLOR_BLACK : COLOR_WHITE, settingVals[i] ? COLOR_GREEN : COLOR_RED);
     }
     write(1, SCREEN_H/2 + 5 + SETTINGS+2, "Return", choice == SETTINGS ? COLOR_GREEN : COLOR_WHITE, 0);
   }
