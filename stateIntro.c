@@ -8,6 +8,8 @@
 #include "stateMenu.h"
 #include "colors.h"
 
+#define END 70
+#define PAUSE 40
 
 void introEvents() {
   SDL_Event e;
@@ -18,11 +20,15 @@ void introEvents() {
 }
 
 void introTick() {
-  if(tickNo == 0) {
+  if(tickNo <= PAUSE) {
+    clearScreen();
+    write(SCREEN_W/2 - 5, (SCREEN_H/2+5)*((float)tickNo/PAUSE), "Chronoware", 0x0F0, 0);
+    write(SCREEN_W/2 - 2, (SCREEN_H-1)-(((float)tickNo/PAUSE)*(SCREEN_H/2-7)), "Games"  , 0xFFF, 0);
+  } else if(tickNo < END) {
+    clearScreen();
     write(SCREEN_W/2 - 5, SCREEN_H/2 + 5, "Chronoware", 0x0F0, 0);
-    write(SCREEN_W/2 - 2, SCREEN_H/2 + 6,    "Games"  , 0xFFF, 0);
-  }
-  if(tickNo == 50) nextState = &menuState;
+    write(SCREEN_W/2 - 2, SCREEN_H/2 + 6, "Games"  , 0xFFF, 0);
+  } else nextState = &menuState;
 }
 
 void introRedraw() {
