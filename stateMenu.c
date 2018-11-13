@@ -67,6 +67,18 @@ void menuEvents() {
               }
             }
             break;
+
+            case SDLK_ESCAPE:
+              switch(currentScreen){
+                case 0:
+                  quit = true;
+                  break;
+                case 3:
+                  choicesCount = OPTIONS;
+                  currentScreen = 0;
+                  choice = 0;
+                  break;
+              }
         }
         break;
     }
