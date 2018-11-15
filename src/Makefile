@@ -1,7 +1,8 @@
+IDIR = ../include
 OBJS   = colors.c states.c events.c tick.c render.c main.c
 STATES = stateIntro.c stateMenu.c
 CC    = gcc
-CFLAGS =
+CFLAGS = -I$(IDIR)
 LIBS = -lSDL2 -lSDL2_image
 NAME  = Planet\ Scraper
 

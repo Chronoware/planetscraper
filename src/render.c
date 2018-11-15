@@ -18,7 +18,7 @@ uint8_t screen[SCREEN_W * SCREEN_H * 5] = { 0 };
 bool init() {
   bool success = true;
 
-  SDL_Surface* tilesetSurface = IMG_Load("tileset.png");
+  SDL_Surface* tilesetSurface = IMG_Load("../img/tileset.png");
   if(tilesetSurface == NULL) return false;
   
   SDL_SetColorKey(tilesetSurface, SDL_TRUE, SDL_MapRGB(tilesetSurface->format, 255, 0, 255));
