@@ -19,6 +19,7 @@ bool init();
 void clearScreen();
 void addTile(uint16_t x, uint16_t y, char  c, uint16_t fg, uint16_t bg);
 void   write(uint16_t x, uint16_t y, char* s, uint16_t fg, uint16_t bg);
+void drawBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t l, uint16_t fg, uint16_t bg);
 void (*redraw)();
 bool deinit();
 

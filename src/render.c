@@ -65,6 +65,36 @@ void write(uint16_t x, uint16_t y, char* s, uint16_t fg, uint16_t bg) {
   }
 }
 
+void drawBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t l, uint16_t fg, uint16_t bg) {
+  uint8_t leftTop     = l? 201 : 218, // ╔ : ┌
+          rightTop    = l? 187 : 191, // ╗ : ┐
+          leftBottom  = l? 200 : 192, // ╚ : └
+          rightBottom = l? 188 : 217, // ╝ : ┘
+          vBar        = l? 186 : 179, // ║ : │
+          hBar        = l? 205 : 196; // ═ : ─
+  
+  addTile(x, y, leftTop, fg, bg);
+  addTile(x+w-1, y, rightTop, fg, bg);
+  addTile(x, y+h-1, leftBottom, fg, bg);
+  addTile(x+w-1, y+h-1, rightBottom, fg, bg);
+
+  for(uint16_t i=0; i<w-2; i++) {
+    addTile(x+i+1, y, hBar, fg, bg);
+    addTile(x+i+1, y+h-1, hBar, fg, bg);
+  }
+
+  for(uint16_t i=0; i<h-2; i++) {
+    addTile(x, y+i+1, vBar, fg, bg);
+    addTile(x+w-1, y+i+1, vBar, fg, bg);
+  }
+
+  for(uint16_t i=1; i<w-1; i++) {
+    for(uint16_t j=1; j<h-1; j++) {
+      addTile(x+i, y+j, ' ', fg, bg);
+    }
+  }
+}
+
 bool deinit() {
   SDL_DestroyTexture(tileset);
   SDL_DestroyWindow(window);

@@ -6,6 +6,7 @@
 #include "render.h"
 #include "states.h"
 #include "colors.h"
+#include "stateNewgame.h"
 
 #define OPTIONS 5
 #define SETTINGS 1
@@ -48,7 +49,8 @@ void menuEvents() {
 
           case SDLK_RETURN:
             if(currentScreen == 0) {
-              if(!strcmp(options[choice], "Exit")) quit = true;
+              if(!strcmp(options[choice], "Exit")) quit = true; else
+              if(!strcmp(options[choice], "New game")) nextState = &newgameState; else
               if(!strcmp(options[choice], "Settings")) {
                 choicesCount = SETTINGS + 1;
                 currentScreen = 3;
