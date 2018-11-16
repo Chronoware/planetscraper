@@ -46,8 +46,14 @@ void newgameEvents() {
           case SDLK_RETURN:
             if(!strcmp(options[choice], "Back")) nextState = &menuState;
             if(!strcmp(options[choice], "Create world") && strlen(settings[0])) {
-              worldGen();
-              nextState = &gameState;
+              FILE *fp;
+              if((fp = fopen(settings[0], "r"))) { // file already exists
+                fclose(fp);
+                // @TODO: add warning
+              } else {
+                worldGen();
+                nextState = &gameState;
+              }
             }
             break;
 
@@ -118,7 +124,7 @@ void newgameRedraw() {
 }
 
 void worldGen() {
-
+  
 }
 
 

@@ -9,6 +9,8 @@
 #include "stateMenu.h"
 #include "stateGame.h"
 
+FILE *gameFile;
+
 void gameEvents() {
   SDL_Event e;
   
