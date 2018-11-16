@@ -10,7 +10,9 @@
 
 #define OPTIONS 5
 #define SETTINGS 1
+#define CREDITS 4
 
+static int currentCredit = 0;
 static int currentScreen = 0;
 static int choicesCount = OPTIONS;
 static int choice = 0;
@@ -23,6 +25,12 @@ static char options[OPTIONS][16] = {
 };
 static char settings[SETTINGS][24] = {
   "Show current tick"
+};
+static char credits[CREDITS][32] = {
+  "Code",
+  "Voltinus",
+  "Code",
+  "Topkeksimus"
 };
 static bool settingVals[SETTINGS] = {
   false //showTick
@@ -57,6 +65,11 @@ void menuEvents() {
                 choice = 0;
                 break;
               }
+              if(!strcmp(options[choice], "Credits")) {
+                currentScreen = 4;
+                currentCredit = 0;
+                break;
+              }
             }
             if(currentScreen == 3) {
               if(choice == SETTINGS) {
@@ -71,15 +84,13 @@ void menuEvents() {
             break;
 
             case SDLK_ESCAPE:
-              switch(currentScreen){
-                case 0:
-                  quit = true;
-                  break;
-                case 3:
-                  choicesCount = OPTIONS;
-                  currentScreen = 0;
-                  choice = 0;
-                  break;
+              if(currentScreen == 0){
+                quit = true;
+              }
+              else{
+                choicesCount = OPTIONS;
+                currentScreen = 0;
+                choice = 0;
               }
         }
         break;
@@ -109,6 +120,13 @@ void menuTick() {
         write(25, SCREEN_H/2 + 5 + i + (i==SETTINGS-1 ? 1 : 0), settingVals[i] ? "ON" : "OFF", settingVals[i] ? COLOR_BLACK : COLOR_WHITE, settingVals[i] ? COLOR_GREEN : COLOR_RED);
       }
       write(1, SCREEN_H/2 + 5 + SETTINGS+2, "Return", choice == SETTINGS ? COLOR_GREEN : COLOR_WHITE, 0);
+      break;
+    
+    case 4: // credits
+      if(tickNo%50 == 0) currentCredit++;
+      if(currentCredit == CREDITS/2) currentCredit = 0;
+      cwrite(SCREEN_W/2, SCREEN_H/2-1, credits[2*currentCredit], COLOR_BLACK, COLOR_GRAY);
+      cwrite(SCREEN_W/2, SCREEN_H/2, credits[1+(2*currentCredit)], COLOR_GREEN, COLOR_BLACK);
       break;
   }
 }

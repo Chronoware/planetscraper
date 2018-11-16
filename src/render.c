@@ -65,6 +65,18 @@ void write(uint16_t x, uint16_t y, char* s, uint16_t fg, uint16_t bg) {
   }
 }
 
+void cwrite(uint16_t x, uint16_t y, char* s, uint16_t fg, uint16_t bg) {
+  for(int i=0; s[i]; i++) {
+    addTile(x+i-(strlen(s)/2), y, s[i], fg, bg);
+  }
+}
+
+void lwrite(uint16_t x, uint16_t y, char* s, uint16_t fg, uint16_t bg) {
+  for(int i=0; s[i]; i++) {
+    addTile(x+i-strlen(s), y, s[i], fg, bg);
+  }
+}
+
 void drawBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t l, uint16_t fg, uint16_t bg) {
   uint8_t leftTop     = l? 201 : 218, // ╔ : ┌
           rightTop    = l? 187 : 191, // ╗ : ┐
