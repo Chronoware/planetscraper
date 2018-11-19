@@ -58,11 +58,25 @@ void newgameEvents() {
             if(!strcmp(options[choice], "Back")) nextState = &menuState;
             if(!strcmp(options[choice], "Create world") && strlen(settings[0])) {
               FILE *fp;
-              if((fp = fopen(settings[0], "r"))) { // file already exists
+              char filename[38];
+              char extension[7] = ".scrap";
+
+              for(int i=0; i<strlen(settings[0]); i++) {
+                filename[i] = settings[0][i];
+              }
+
+              for(int i=0; i<strlen(extension)+1; i++) {
+                filename[i+strlen(settings[0])] = extension[i];
+              }
+
+              printf("%s\n", filename);
+
+              if((fp = fopen(filename, "wb"))) { // file already exists
                 fclose(fp);
                 // @TODO: add warning
               } else {
-                worldGen();
+                worldGen(fp);
+                fclose(fp);
                 nextState = &gameState;
               }
             }
@@ -134,8 +148,8 @@ void newgameRedraw() {
   SDL_RenderPresent(renderer);
 }
 
-void worldGen() {
-  
+void worldGen(FILE *fp) {
+  fprintf(fp, "SCRP");
 }
 
 
