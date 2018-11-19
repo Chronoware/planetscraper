@@ -26,3 +26,7 @@ uint8_t bgGreen(uint8_t* src, uint32_t pos){
 uint8_t bgBlue(uint8_t* src, uint32_t pos){
     return (src[pos+4] & 0x0F)*17;
 }
+
+uint8_t rgbSet(uint8_t red, uint8_t green, uint8_t blue){
+    return ((red >> 4) << 8) | ((green >> 4) << 4) | (blue >> 4);
+}

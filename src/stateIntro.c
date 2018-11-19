@@ -22,12 +22,12 @@ void introEvents() {
 void introTick() {
   if(tickNo <= PAUSE) {
     clearScreen();
-    write(SCREEN_W/2 - 5, (SCREEN_H/2+5)*((float)tickNo/PAUSE), "Chronoware", 0x0F0, 0);
-    write(SCREEN_W/2 - 2, (SCREEN_H-1)-(((float)tickNo/PAUSE)*(SCREEN_H/2-7)), "Games"  , 0xFFF, 0);
+    write(SCREEN_W/2 - 5, (SCREEN_H/2+5)*((float)tickNo/PAUSE), "Chronoware", COLOR_GREEN, 0);
+    write(SCREEN_W/2 - 2, (SCREEN_H-1)-(((float)tickNo/PAUSE)*(SCREEN_H/2-7)), "Games"  , COLOR_WHITE, 0);
   } else if(tickNo < END) {
     clearScreen();
-    write(SCREEN_W/2 - 5, SCREEN_H/2 + 5, "Chronoware", 0x0F0, 0);
-    write(SCREEN_W/2 - 2, SCREEN_H/2 + 6, "Games"  , 0xFFF, 0);
+    write(SCREEN_W/2 - 5, SCREEN_H/2 + 5, "Chronoware", COLOR_GREEN, 0);
+    write(SCREEN_W/2 - 2, SCREEN_H/2 + 6, "Games"  , COLOR_WHITE, 0);
   } else nextState = &menuState;
 }
 
