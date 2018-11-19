@@ -12,11 +12,16 @@
 #define COLOR_GRAY      0x888
 #define COLOR_WHITE     0xFFF
 
-uint8_t fgRed(uint8_t* src, uint32_t pos);
+uint8_t fgRed(uint8_t* src, uint32_t pos);                  //Foreground color from screen
 uint8_t fgGreen(uint8_t* src, uint32_t pos);
 uint8_t fgBlue(uint8_t* src, uint32_t pos);
-uint8_t bgRed(uint8_t* src, uint32_t pos);
+
+uint8_t bgRed(uint8_t* src, uint32_t pos);                  //Background color from screen
 uint8_t bgGreen(uint8_t* src, uint32_t pos);
 uint8_t bgBlue(uint8_t* src, uint32_t pos);
+
+uint16_t rgbSet(uint8_t red, uint8_t green, uint8_t blue);   //RGB operations
+uint16_t rgbMix(uint16_t colorA, uint16_t colorB);
+uint16_t rgbAdd(uint16_t colorA, uint16_t colorB);
 
 #endif

@@ -26,3 +26,36 @@ uint8_t bgGreen(uint8_t* src, uint32_t pos){
 uint8_t bgBlue(uint8_t* src, uint32_t pos){
     return (src[pos+4] & 0x0F)*17;
 }
+
+uint16_t rgb(uint8_t red, uint8_t green, uint8_t blue){
+    return ((red >> 4) << 8) | ((green >> 4) << 4) | (blue >> 4);
+}
+
+uint16_t rgbMix(uint16_t colorA, uint16_t colorB){
+    uint8_t redA = (colorA >> 8)*17,
+            greenA = ((colorA >> 4) & 0xF)*17,
+            blueA = (colorA & 0xF)*17,
+            redB = (colorA >> 8)*17,
+            greenB = ((colorA >> 4) & 0xF)*17,
+            blueB = (colorA & 0xF)*17;
+    
+    return rgb((redA+redB)/2, (greenA+greenB)/2, (blueA+blueB)/2);
+}
+
+uint16_t rgbAdd(uint16_t colorA, uint16_t colorB){
+    uint8_t redA = (colorA >> 8)*17,
+            greenA = ((colorA >> 4) & 0xF)*17,
+            blueA = (colorA & 0xF)*17,
+            redB = (colorA >> 8)*17,
+            greenB = ((colorA >> 4) & 0xF)*17,
+            blueB = (colorA & 0xF)*17,
+            redC = redA + redB,
+            greenC = greenA + greenB,
+            blueC = blueA + blueB;
+
+    if(redC < redA || redC < redB) redC = 255;
+    if(greenC < greenA || greenC < greenB) greenC = 255;
+    if(blueC < blueA || blueC < blueB) blueC = 255;
+
+    return rgb(redC, greenC, blueC);
+}

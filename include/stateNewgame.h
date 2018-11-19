@@ -4,7 +4,7 @@
 void newgameEvents();
 void newgameTick();
 void newgameRedraw();
-void worldGen();
+void worldGen(FILE *fp);
 struct State newgameState;
 
 #endif
