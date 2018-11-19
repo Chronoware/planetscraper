@@ -28,8 +28,7 @@ uint32_t getSeed(char *s) {
   uint32_t seed = 0xABCDDCBA;
 
   for(int i=0; i<strlen(s); i++) {
-    seed <<= 1;
-    seed |= s[i];
+    seed *= (s[i] + i);
   }
 
   return seed;
@@ -71,8 +70,9 @@ void newgameEvents() {
 
               printf("%s\n", filename);
 
-              if((fp = fopen(filename, "wb"))) { // file already exists
+              if(!(fp = fopen(filename, "ab"))) { // file already exists
                 fclose(fp);
+                printf("File exists!\n");
                 // @TODO: add warning
               } else {
                 worldGen(fp);
@@ -149,7 +149,22 @@ void newgameRedraw() {
 }
 
 void worldGen(FILE *fp) {
-  fprintf(fp, "SCRP");
+  char *signature = "SCRP";
+  char *version   = "0001";
+  char *worldName = malloc(33*sizeof(char));
+  uint32_t seed = getSeed(settings[1]);
+
+  for(uint8_t i=0; i<32; i++) {
+    if(i < strlen(settings[0])) worldName[i] = settings[0][i];
+    else worldName[i] = 0x20; // space character
+  }
+  worldName[32] = 0;
+
+  fprintf(fp, signature);
+  fprintf(fp, version);
+  fprintf(fp, worldName);
+  fprintf(fp, "%08X", seed);
+  for(uint8_t i=0; i<16; i++) putc('0', fp);
 }
 
 
