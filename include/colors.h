@@ -20,8 +20,8 @@ uint8_t bgRed(uint8_t* src, uint32_t pos);                  //Background color f
 uint8_t bgGreen(uint8_t* src, uint32_t pos);
 uint8_t bgBlue(uint8_t* src, uint32_t pos);
 
-uint8_t rgbSet(uint8_t red, uint8_t green, uint8_t blue);   //RGB operations
-//uint8_t rgbMix(uint8_t* colorA, uint8_t colorB);
-//uint8_t rgbAdd(uint8_t* colorA, uint8_t colorB);
+uint16_t rgbSet(uint8_t red, uint8_t green, uint8_t blue);   //RGB operations
+uint16_t rgbMix(uint16_t colorA, uint16_t colorB);
+uint16_t rgbAdd(uint16_t colorA, uint16_t colorB);
 
 #endif
