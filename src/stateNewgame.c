@@ -24,6 +24,17 @@ static char settings[SETTINGS][32] = {
   "Test", ""
 };
 
+uint32_t getSeed(char *s) {
+  uint32_t seed = 0xABCDDCBA;
+
+  for(int i=0; i<strlen(s); i++) {
+    seed <<= 1;
+    seed |= s[i];
+  }
+
+  return seed;
+}
+
 void newgameEvents() {
   SDL_Event e;
   
