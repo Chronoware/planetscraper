@@ -9,6 +9,8 @@
 #include "render.h"
 #include "stateIntro.h"
 
+#define TICK 20 // tick length in milliseconds
+
 int main(int argc, char** argv) {
   if(!init()) {
     printf("0 SDL_Error: %s\n", SDL_GetError());
@@ -17,7 +19,10 @@ int main(int argc, char** argv) {
 
   nextState = &introState;
 
+  uint32_t timestamp;
+
   while(!quit) {
+    timestamp = SDL_GetTicks();
     if(nextState != NULL) {
       setState(nextState);
       nextState = NULL;
@@ -28,7 +33,7 @@ int main(int argc, char** argv) {
     currentState->redraw();
 
     tickNo++;
-    SDL_Delay(20);
+    while(SDL_GetTicks() - timestamp < TICK) SDL_Delay(1);
   }
 
   deinit();
