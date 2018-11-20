@@ -4,12 +4,12 @@ Planet Scraper file specification, v0.1 (0001)
 0. Main assumptions
   1. World map
     1. Coordinate system
-  	  X - horizontal from west to east
+      X - horizontal from west to east
       Y - horizontal from north to south
-	  Z - vertical from down to up
-	2. World boundaries
-	  World map is looping in X and Y axes, but not in Z axis. Maximum
-	  coordinate value is 4095 (0xFFF) for X and Y, and 255 for Z.
+      Z - vertical from down to up
+  2. World boundaries
+    World map is looping in X and Y axes, but not in Z axis. Maximum
+    coordinate value is 4095 (0xFFF) for X and Y, and 255 for Z.
 
 	
 	
@@ -27,24 +27,24 @@ SCRP0001New World                       ABCDDCBA0000000000000000
 2. MAP
   1. Generated chunks
     1. End of chunks info in bytes from the begining of the file + 1 (4B)
-	2. Chunks info (max 256*256=65536)
-	  1. Coordinates of the chunk (2B, X and Y)
-	  2. List of blocks
-		1. Number of continous blocks (0-3B, in XYZ order)
-		  Bytes in that part always start with first bit equal to 1. Number of
-		  that bytes must be in range <0;3> It's decoded using the following
-		  pattern: set first bit to 0 and save it as N, where N is number of
-		  continous blocks. As long as next byte's first bit is 1, shift N
-		  leftwards by 7 bits and OR N with that byte. If next byte's first
-		  bit is equal to 0, end decoding
-		2. ID of block (1B)
-		  ID is always in range <0;127>, because first bit must be 0.
+    2. Chunks info (max 256*256=65536)
+      1. Coordinates of the chunk (2B, X and Y)
+      2. List of blocks
+        1. Number of continous blocks (0-3B, in XYZ order)
+          Bytes in that part always start with first bit equal to 1. Number of
+          that bytes must be in range <0;3> It's decoded using the following
+          pattern: set first bit to 0 and save it as N, where N is number of
+          continous blocks. As long as next byte's first bit is 1, shift N
+          leftwards by 7 bits and OR N with that byte. If next byte's first
+          bit is equal to 0, end decoding
+        2. ID of block (1B)
+          ID is always in range <0;127>, because first bit must be 0.
   2. Objects
-	1. End of objects info in bytes from the begining of the file + 1 (4B)
-	2. Objects info
-	  1. Coordinates of the object (5B)
-		1. X coordinate (2B, first 4 bits equal to 0, see 0.1.2)
-		2. Y coordinate (2B, same as above)
-		3. Z coordinate (1B)
-	  2. Type of object (2B, where 1st byte is category and 2nd one is subtype)
-	  3. Size of remaining object data in bytes
+    1. End of objects info in bytes from the begining of the file + 1 (4B)
+    2. Objects info
+      1. Coordinates of the object (5B)
+        1. X coordinate (2B, first 4 bits equal to 0, see 0.1.2)
+        2. Y coordinate (2B, same as above)
+        3. Z coordinate (1B)
+      2. Type of object (2B, where 1st byte is category and 2nd one is subtype)
+      3. Size of remaining object data in bytes
