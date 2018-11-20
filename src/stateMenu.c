@@ -116,10 +116,10 @@ void menuTick() {
 
     case 3: // options
       for(int i=0; i<SETTINGS; i++) {
-        write(1, SCREEN_H/2 + 5 + i + (i==SETTINGS-1 ? 1 : 0), settings[i], choice == i ? COLOR_GREEN : COLOR_WHITE, 0);
-        write(25, SCREEN_H/2 + 5 + i + (i==SETTINGS-1 ? 1 : 0), settingVals[i] ? "ON" : "OFF", settingVals[i] ? COLOR_BLACK : COLOR_WHITE, settingVals[i] ? COLOR_GREEN : COLOR_RED);
+        write(1, SCREEN_H - SETTINGS - 7 + i, settings[i], choice == i ? COLOR_GREEN : COLOR_WHITE, 0);
+        write(SCREEN_W/2, SCREEN_H - SETTINGS - 7 + i, settingVals[i] ? "ON" : "OFF", settingVals[i] ? COLOR_BLACK : COLOR_WHITE, settingVals[i] ? COLOR_GREEN : COLOR_RED);
       }
-      write(1, SCREEN_H/2 + 5 + SETTINGS+2, "Return", choice == SETTINGS ? COLOR_GREEN : COLOR_WHITE, 0);
+      write(1, SCREEN_H - 6, "Return", choice == SETTINGS ? COLOR_GREEN : COLOR_WHITE, 0);
       break;
     
     case 4: // credits
