@@ -22,6 +22,7 @@ uint8_t bgBlue(uint8_t* src, uint32_t pos);
 
 uint16_t rgbSet(uint8_t red, uint8_t green, uint8_t blue);   //RGB operations
 uint16_t rgbMix(uint16_t colorA, uint16_t colorB);
+uint16_t rgbBlend(uint16_t colorA, uint16_t colorB, double opacity);
 uint16_t rgbAdd(uint16_t colorA, uint16_t colorB);
 
 #endif

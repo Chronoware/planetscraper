@@ -35,11 +35,22 @@ uint16_t rgbMix(uint16_t colorA, uint16_t colorB){
     uint8_t redA = (colorA >> 8)*17,
             greenA = ((colorA >> 4) & 0xF)*17,
             blueA = (colorA & 0xF)*17,
-            redB = (colorA >> 8)*17,
-            greenB = ((colorA >> 4) & 0xF)*17,
-            blueB = (colorA & 0xF)*17;
-    
+            redB = (colorB >> 8)*17,
+            greenB = ((colorB >> 4) & 0xF)*17,
+            blueB = (colorB & 0xF)*17;
     return rgb((redA+redB)/2, (greenA+greenB)/2, (blueA+blueB)/2);
+}
+
+uint16_t rgbBlend(uint16_t colorA, uint16_t colorB, double opacity){
+    uint8_t redA = (colorA >> 8)*17,
+            greenA = ((colorA >> 4) & 0xF)*17,
+            blueA = (colorA & 0xF)*17,
+            redB = (colorB >> 8)*17,
+            greenB = ((colorB >> 4) & 0xF)*17,
+            blueB = (colorB & 0xF)*17;
+    if(opacity < 0) opacity = 0;
+    if(opacity > 1) opacity = 1;
+    return rgb((redA*(1-opacity)+redB*opacity)/2, (greenA*(1-opacity)+greenB*opacity)/2, (blueA*(1-opacity)+blueB*opacity)/2);
 }
 
 uint16_t rgbAdd(uint16_t colorA, uint16_t colorB){

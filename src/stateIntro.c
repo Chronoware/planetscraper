@@ -22,8 +22,8 @@ void introEvents() {
 void introTick() {
   if(tickNo <= PAUSE) {
     clearScreen();
-    write(SCREEN_W/2 - 5, (SCREEN_H/2+5)*((float)tickNo/PAUSE), "Chronoware", COLOR_GREEN, 0);
-    write(SCREEN_W/2 - 2, (SCREEN_H-1)-(((float)tickNo/PAUSE)*(SCREEN_H/2-7)), "Games"  , COLOR_WHITE, 0);
+    write(SCREEN_W/2 - 5, (SCREEN_H/2+5)*((float)tickNo/PAUSE), "Chronoware", rgbBlend(COLOR_BLACK, COLOR_GREEN, (float)tickNo/PAUSE), 0);
+    write(SCREEN_W/2 - 2, (SCREEN_H-1)-(((float)tickNo/PAUSE)*(SCREEN_H/2-7)), "Games"  , rgbBlend(COLOR_BLACK, COLOR_WHITE, (float)tickNo/PAUSE), 0);
   } else if(tickNo < END) {
     clearScreen();
     write(SCREEN_W/2 - 5, SCREEN_H/2 + 5, "Chronoware", COLOR_GREEN, 0);
