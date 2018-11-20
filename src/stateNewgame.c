@@ -28,7 +28,8 @@ uint32_t getSeed(char *s) {
   uint32_t seed = 0xABCDDCBA;
 
   for(int i=0; i<strlen(s); i++) {
-    seed *= (s[i] + i);
+    seed <<= 1;
+    seed |= (s[i] + i);
   }
 
   return seed;
@@ -160,9 +161,9 @@ void worldGen(FILE *fp) {
   }
   worldName[32] = 0;
 
-  fprintf(fp, signature);
-  fprintf(fp, version);
-  fprintf(fp, worldName);
+  fprintf(fp, "%s", signature);
+  fprintf(fp, "%s", version);
+  fprintf(fp, "%s", worldName);
   fprintf(fp, "%08X", seed);
   for(uint8_t i=0; i<16; i++) putc('0', fp);
 }
