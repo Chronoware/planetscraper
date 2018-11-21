@@ -78,6 +78,18 @@ State gameState = {
 };
 
 
-uint8_t *genChunk(uint8_t x, uint16_t y, uint32_t seed) {
-  
+FILE *fp = NULL;
+extern uint8_t *chunks[256];
+
+uint8_t *loadChunkFromFile(uint8_t x, uint8_t y) {
+  return NULL;
+}
+
+uint8_t *loadChunk(uint8_t x, uint8_t y, uint32_t seed) {
+  uint8_t *chunk = loadChunkFromFile(x, y);
+  if(chunk == NULL) { // chunk not yet generated
+
+  } else {
+
+  }
 }

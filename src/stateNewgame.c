@@ -57,7 +57,6 @@ void newgameEvents() {
           case SDLK_RETURN:
             if(!strcmp(options[choice], "Back")) nextState = &menuState;
             if(!strcmp(options[choice], "Create world") && strlen(settings[0])) {
-              FILE *fp;
               char filename[38];
               char extension[7] = ".scrap";
 
@@ -71,13 +70,15 @@ void newgameEvents() {
 
               printf("%s\n", filename);
 
-              if(!(fp = fopen(filename, "ab"))) { // file already exists
+              printf("0\n");
+              if(fp = fopen(filename, "r")) { // file already exists
                 fclose(fp);
                 printf("File exists!\n");
                 // @TODO: add warning
               } else {
-                worldGen(fp);
                 fclose(fp);
+                fp = fopen(filename, "ab");
+                worldGen();
                 nextState = &gameState;
               }
             }
@@ -149,7 +150,7 @@ void newgameRedraw() {
   SDL_RenderPresent(renderer);
 }
 
-void worldGen(FILE *fp) {
+void worldGen() {
   char *signature = "SCRP";
   char *version   = "0001";
   char *worldName = malloc(33*sizeof(char));
@@ -166,11 +167,12 @@ void worldGen(FILE *fp) {
   fprintf(fp, "%s", version);
   fprintf(fp, "%s", worldName);
   fprintf(fp, "%08X", seed);
-  fprintf(fp, "%c%c%c", 0x80, 0x08, 0x00); // 0x800 = 2048
+  fprintf(fp, "%c%c%c", 0x80, 0x08, 0x00); // 0x800 = 2048, cam pos
   for(uint8_t i=0; i<13; i++) putc('0', fp);
 
-  // CHUNK INFO
-
+  // EMPTY CHUNK LIST
+  uint32_t chunksBlockSize = 4;
+  fwrite(&chunksBlockSize, sizeof(uint32_t), 1, fp);
 }
 
 

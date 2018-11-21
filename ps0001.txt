@@ -27,7 +27,7 @@ SCRP0001New World                       ABCDDCBA0000000000000000
   
 2. MAP
   1. Generated chunks
-    1. End of chunks info in bytes from the begining of the file + 1 (4B)
+    1. Size of this block in bytes (4B)
     2. Chunks info (max 256*256=65536)
       1. Coordinates of the chunk (2B, X and Y)
       2. List of blocks
@@ -41,7 +41,7 @@ SCRP0001New World                       ABCDDCBA0000000000000000
         2. ID of block (1B)
           ID is always in range <0;127>, because first bit must be 0.
   2. Objects
-    1. End of objects info in bytes from the begining of the file + 1 (4B)
+    1. Size of this block in bytes (4B)
     2. Objects info
       1. Coordinates of the object (5B)
         1. X coordinate (2B, first 4 bits equal to 0, see 0.1.2)
