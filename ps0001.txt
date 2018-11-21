@@ -22,7 +22,8 @@ SCRP0001New World                       ABCDDCBA0000000000000000
   2. File version (4B, hex from 0000 to FFFF)
   3. World name (32B)
   4. Seed (8B, hex)
-  5. Reserved (16B)
+  5. Camera position (3B, 12-bit for X and Y)
+  6. Reserved (13B)
   
 2. MAP
   1. Generated chunks

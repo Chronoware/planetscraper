@@ -76,3 +76,8 @@ State gameState = {
   .tick   = gameTick,
   .redraw = gameRedraw
 };
+
+
+uint8_t *genChunk(uint8_t x, uint16_t y, uint32_t seed) {
+  
+}

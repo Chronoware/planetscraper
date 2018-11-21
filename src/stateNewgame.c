@@ -161,11 +161,16 @@ void worldGen(FILE *fp) {
   }
   worldName[32] = 0;
 
+  // HEADER
   fprintf(fp, "%s", signature);
   fprintf(fp, "%s", version);
   fprintf(fp, "%s", worldName);
   fprintf(fp, "%08X", seed);
-  for(uint8_t i=0; i<16; i++) putc('0', fp);
+  fprintf(fp, "%c%c%c", 0x80, 0x08, 0x00); // 0x800 = 2048
+  for(uint8_t i=0; i<13; i++) putc('0', fp);
+
+  // CHUNK INFO
+
 }
 
 
