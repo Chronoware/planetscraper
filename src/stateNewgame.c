@@ -29,7 +29,7 @@ uint32_t getSeed(char *s) {
 
   for(int i=0; i<strlen(s); i++) {
     seed <<= 1;
-    seed |= (s[i] + i);
+    seed ^= (s[i] + i);
   }
 
   return seed;
@@ -75,11 +75,13 @@ void newgameEvents() {
                 fclose(fp);
                 printf("File exists!\n");
                 // @TODO: add warning
+                printf("1\n");
               } else {
                 fclose(fp);
                 fp = fopen(filename, "ab");
                 worldGen();
                 nextState = &gameState;
+                printf("2\n");
               }
             }
             break;
