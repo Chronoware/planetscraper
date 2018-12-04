@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <math.h>
 #include "colors.h"
 
 // color = ????rrrr.ggggbbbb; 2 bytes, 4-bit colors, first 4 bits reserved
@@ -74,7 +75,7 @@ uint16_t rgbAdd(uint16_t colorA, uint16_t colorB){
 uint16_t hsv(uint16_t hue, float sat, float val){
     float c, x, m, rp, gp, bp, ang = hue % 360;
     c = val * sat;
-    x = c * (1 - abs(ang/60)%2-1);
+    x = c * (1 - fabs(fmod(ang/60,2)-1));
     m = val - c;
     if(0 <= ang && ang < 60){
         rp = c,
