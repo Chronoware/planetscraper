@@ -70,3 +70,41 @@ uint16_t rgbAdd(uint16_t colorA, uint16_t colorB){
 
     return rgb(redC, greenC, blueC);
 }
+
+uint16_t hsv(uint16_t hue, float sat, float val){
+    float c, x, m, rp, gp, bp, ang = hue % 360;
+    c = val * sat;
+    x = c * (1 - abs(ang/60)%2-1);
+    m = val - c;
+    if(0 <= ang && ang < 60){
+        rp = c,
+        gp = x,
+        bp = 0;
+    }
+    if(60 <= ang && ang < 120){
+        rp = x,
+        gp = c,
+        bp = 0;
+    }
+    if(120 <= ang && ang < 180){
+        rp = 0,
+        gp = c,
+        bp = x;
+    }
+    if(180 <= ang && ang < 240){
+        rp = 0,
+        gp = x,
+        bp = c;
+    }
+    if(240 <= ang && ang < 300){
+        rp = x,
+        gp = 0,
+        bp = c;
+    }
+    if(300 <= ang && ang < 360){
+        rp = c,
+        gp = 0,
+        bp = x;
+    }
+    return rgb((rp+m)*255, (gp+m)*255, (bp+m)*255);
+}

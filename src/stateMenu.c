@@ -110,7 +110,7 @@ void menuTick() {
   switch(currentScreen) {
     case 0: // main menu
       for(int i=0; i<OPTIONS; i++) {
-        write(1, SCREEN_H/2 + 5 + i + (i==OPTIONS-1 ? 1 : 0), options[i], choice == i ? COLOR_GREEN : COLOR_WHITE, 0);
+        write(1, SCREEN_H/2 + 5 + i + (i==OPTIONS-1 ? 1 : 0), options[i], choice == i ? hsv(tick, 1, 1) : COLOR_WHITE, 0);
       }
       break;
 
