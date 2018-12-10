@@ -13,17 +13,17 @@ Planet Scraper file specification, v0.1 (0001)
 
 	
 	
-SCRP0001New World                       ABCDDCBA0000000000000000
-1__/2__/3______________________________/4______/5______________/
+SCRP0001New World                       ABCD00000000000000000000
+1__/2__/3______________________________/4__/5__/6______________/
 
 
 1. HEADER (64B)
   1. File signature (4B, always "SCRP")
   2. File version (4B, hex from 0000 to FFFF)
   3. World name (32B)
-  4. Seed (8B, hex)
-  5. Camera position (3B, 12-bit for X and Y)
-  6. Reserved (13B)
+  4. Seed (4B, hex)
+  5. Camera position (4B, 2B for X and Y)
+  6. Reserved (16B)
   
 2. MAP
   1. Generated chunks

@@ -67,21 +67,15 @@ void newgameEvents() {
               for(int i=0; i<strlen(extension)+1; i++) {
                 filename[i+strlen(settings[0])] = extension[i];
               }
-
-              printf("%s\n", filename);
-
-              printf("0\n");
+              
               if(fp = fopen(filename, "r")) { // file already exists
                 fclose(fp);
                 printf("File exists!\n");
                 // @TODO: add warning
-                printf("1\n");
               } else {
-                fclose(fp);
                 fp = fopen(filename, "ab");
                 worldGen();
                 nextState = &gameState;
-                printf("2\n");
               }
             }
             break;
@@ -164,17 +158,23 @@ void worldGen() {
   }
   worldName[32] = 0;
 
-  // HEADER
+  // HEADER, 64B
   fprintf(fp, "%s", signature);
   fprintf(fp, "%s", version);
   fprintf(fp, "%s", worldName);
-  fprintf(fp, "%08X", seed);
-  fprintf(fp, "%c%c%c", 0x80, 0x08, 0x00); // 0x800 = 2048, cam pos
-  for(uint8_t i=0; i<13; i++) putc('0', fp);
+  fwrite(&seed, sizeof(uint32_t), 1, fp);
+  uint16_t camPos = 0x800;
+  fwrite(&camPos, sizeof(uint16_t), 1, fp);
+  fwrite(&camPos, sizeof(uint16_t), 1, fp);
+  for(uint8_t i=0; i<16; i++) putc('0', fp);
 
   // EMPTY CHUNK LIST
   uint32_t chunksBlockSize = 4;
   fwrite(&chunksBlockSize, sizeof(uint32_t), 1, fp);
+
+  // EMPTY OBJECT LIST
+  uint32_t objectBlockSize = 4;
+  fwrite(&objectBlockSize, sizeof(uint32_t), 1, fp);
 }
 
 
