@@ -57,16 +57,10 @@ void newgameEvents() {
           case SDLK_RETURN:
             if(!strcmp(options[choice], "Back")) nextState = &menuState;
             if(!strcmp(options[choice], "Create world") && strlen(settings[0])) {
-              char filename[38];
-              char extension[7] = ".scrap";
-
-              for(int i=0; i<strlen(settings[0]); i++) {
-                filename[i] = settings[0][i];
-              }
-
-              for(int i=0; i<strlen(extension)+1; i++) {
-                filename[i+strlen(settings[0])] = extension[i];
-              }
+              char extension[] = ".scrap";
+              char *filename = malloc(sizeof(char)*(strlen(settings[0])+strlen(extension)));
+              strcpy(filename, settings[0]);
+              strcat(filename, extension);
               
               if(fp = fopen(filename, "r")) { // file already exists
                 fclose(fp);
@@ -77,6 +71,7 @@ void newgameEvents() {
                 worldGen();
                 nextState = &gameState;
               }
+              free(filename);
             }
             break;
 
